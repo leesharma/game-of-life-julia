@@ -1,10 +1,11 @@
 module GameOfLife
 export run
 include("./board.jl")
+include("./display.jl")
 
 function step(board::BitArray, iter; delay=0.5)
     println("Iteration $iter")
-    show_bit_array(board)
+    Display.show_bit_array(board)
     println("\n");
     sleep(delay)
     Board.next(board)
@@ -18,15 +19,6 @@ function run(board::BitArray; steps=50, step_time=0.5)
             return
         end
         board = next
-    end
-end
-
-function show_bit_array(ba::BitArray)
-    for i in 1:size(ba,1)
-        for j in 1:size(ba,2)
-            ba[i,j] ? print('🁢') : print('·')
-        end
-        println()
     end
 end
 
