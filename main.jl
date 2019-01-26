@@ -3,30 +3,30 @@ include("board.jl")
 
 
 # game of life creatures
-glider = BitArray(
+glider = Board.from(
     [1 1 1;
      1 0 0;
      0 1 0]
 )
-lightweight_space_ship = BitArray(
+lightweight_space_ship = Board.from(
     [0 1 0 0 1;
      1 0 0 0 0;
      1 0 0 0 1;
      1 1 1 1 0]
 )
-l_tetromino = BitArray(
+l_tetromino = Board.from(
     [1 1 1;
      1 0 0]
 )
 
-star_tetromino = BitArray(
+star_tetromino = Board.from(
     [0 1 0;
      1 1 1]
 )
 
 
 # set up the board
-board = falses(11, 11)
+board = Board.empty(11, 11)
 board = Board.place(board, star_tetromino, (5, 5))
 start_board = board
 
