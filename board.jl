@@ -1,10 +1,13 @@
 module Board
 export next, place, empty, from
-include("./grid_torus.jl")
 
-function next(current_generation::BitArray)
-    neighbors = GridTorus.neighbor_count(current_generation)
-    ((neighbors.==4) .& current_generation) .| (neighbors.==3)
+function next(current_generation::BitArray;
+              rules::Module,
+              manifold::Module)
+    isa(rules, Module)    || error("No rules module included.")
+    isa(manifold, Module) || error("No manifold module included.")
+
+    rules.next(current_generation, manifold)
 end
 
 function place(board, pattern, (i,j))
